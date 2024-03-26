@@ -19,6 +19,9 @@ const SignUp = () => {
     try {
       //1. Upload Image
       const imageData = await imageUpload(image)
+      
+      //2. User Registration
+      const result = await createUser(email, password)
 
     }
     catch(err){
