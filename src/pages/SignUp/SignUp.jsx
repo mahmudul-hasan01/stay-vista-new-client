@@ -23,6 +23,9 @@ const SignUp = () => {
       //2. User Registration
       const result = await createUser(email, password)
 
+      //3. Save username & profile photo
+      await updateUserProfile(name, imageData?.data?.display_url)
+      console.log(result)
     }
     catch(err){
       console.log(err);
