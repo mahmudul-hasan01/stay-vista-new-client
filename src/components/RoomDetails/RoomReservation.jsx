@@ -7,6 +7,8 @@ import { formatDistance } from 'date-fns'
 import useAuth from '../../hooks/useAuth'
 
 const RoomReservation = ({ room }) => {
+  console.log(room);
+
   let [isOpen, setIsOpen] = useState(false)
   const { user } = useAuth()
 

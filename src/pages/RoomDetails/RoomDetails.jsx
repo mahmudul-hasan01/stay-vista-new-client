@@ -6,25 +6,39 @@ import { Helmet } from 'react-helmet-async';
 import Header from "../../components/RoomDetails/Header";
 import RoomInfo from "../../components/RoomDetails/RoomInfo";
 import RoomReservation from "../../components/RoomDetails/RoomReservation";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const RoomDetails = () => {
     const { id } = useParams()
 
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
 
-    const [rooms, setRooms] = useState({})
-    useEffect(() => {
-        setLoading(true)
-        fetch('/rooms.json')
-            .then(res => res.json())
-            .then(data => {
-                const singleRoom = data.find(room => room._id === id)
-                setRooms(singleRoom)
-            })
-        setLoading(false)
-    }, [id])
+    // const [rooms, setRooms] = useState({})
 
-    if (loading) return <Loader />
+
+    const {data: rooms = [], isLoading} = useQuery({
+        queryKey: ['allRooms'],
+        queryFn: async () => {
+            const res =await axios.get(`http://localhost:5000/room/${id}`)
+            return res.data
+        }
+    })
+
+
+    
+    // useEffect(() => {
+    //     setLoading(true)
+    //     fetch('/rooms.json')
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             const singleRoom = data.find(room => room._id === id)
+    //             setRooms(singleRoom)
+    //         })
+    //     setLoading(false)
+    // }, [id])
+
+    if (isLoading) return <Loader />
 
     return (
         <Container>
