@@ -22,8 +22,8 @@ const RoomReservation = ({ room }) => {
   })
 
   // dateFormat
-  const totalDays = parseInt(formatDistance(new Date(2024, 3, 20), new Date(2024, 3, 25)).split(' ')[0])
-  // formatDistance(new Date(room?.to), new Date(room?.from))
+  // const totalDays = parseInt(formatDistance(new Date(2024, 3, 20), new Date(2024, 3, 25)).split(' ')[0])
+  const totalDays = formatDistance(new Date(room?.to), new Date(room?.from))
   
   //   Total days * price
   const totalPrice = totalDays * room?.price
