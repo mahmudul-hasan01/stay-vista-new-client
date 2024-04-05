@@ -6,7 +6,7 @@ const DashboardLayout = () => {
         <div className='relative min-h-screen md:flex'>
             {/* Sidebar Component */}
             <Sideber></Sideber>
-            <div className='flex-1  md:ml-64'>
+            <div className='flex-1  ml-64'>
                 <div className='p-5'>
                     {/* Outlet for dynamic contents */}
                     <Outlet></Outlet>

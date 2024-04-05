@@ -11,12 +11,14 @@ import { BsGraphUp } from 'react-icons/bs'
 import { MdAddHomeWork } from "react-icons/md";
 import { MdOutlineBroadcastOnHome } from "react-icons/md";
 import { FaHome } from 'react-icons/fa'
+import useAuth from '../../../hooks/useAuth'
 
 
 const Sidebar = () => {
+
     const [toggle, setToggle] = useState(false)
     const [isActive, setActive] = useState(false)
-
+    const {logOut} = useAuth()
     //   For guest/host menu item toggle button
     const toggleHandler = event => {
         setToggle(event.target.checked)
@@ -92,7 +94,7 @@ const Sidebar = () => {
                         label='Profile'
                         address='/dashboard/profile'
                     />
-                    <button className='flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'>
+                    <button onClick={logOut} className='flex w-full items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-300   hover:text-gray-700 transition-colors duration-300 transform'>
                         <GrLogout className='w-5 h-5' />
 
                         <span className='mx-4 font-medium'>Logout</span>
