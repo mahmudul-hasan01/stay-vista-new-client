@@ -67,12 +67,12 @@ const Sidebar = () => {
                             <MenuItem
                                 icon={MdAddHomeWork}
                                 label='Add Room'
-                                address='/add-room'
+                                address='/dashboard/add-room'
                             />
                             <MenuItem
                                 icon={MdOutlineBroadcastOnHome}
                                 label='My Listings'
-                                address='/my-listings'
+                                address='/dashboard/my-listings'
                             />
                         </nav>
                     </div>
