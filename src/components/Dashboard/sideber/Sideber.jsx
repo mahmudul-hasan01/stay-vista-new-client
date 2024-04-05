@@ -10,6 +10,7 @@ import { AiOutlineBars } from 'react-icons/ai'
 import { BsGraphUp } from 'react-icons/bs'
 import { MdAddHomeWork } from "react-icons/md";
 import { MdOutlineBroadcastOnHome } from "react-icons/md";
+import { FaHome } from 'react-icons/fa'
 
 
 const Sidebar = () => {
@@ -81,6 +82,11 @@ const Sidebar = () => {
                 <div>
                     <hr />
 
+                    <MenuItem
+                        icon={FaHome}
+                        label='Home'
+                        address='/'
+                    />
                     <MenuItem
                         icon={FcSettings}
                         label='Profile'

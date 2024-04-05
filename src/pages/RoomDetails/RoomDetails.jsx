@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import Container from "../../components/Shared/Container";
-import { useEffect, useState } from "react";
 import Loader from "../../components/Shared/Loader";
 import { Helmet } from 'react-helmet-async';
 import Header from "../../components/RoomDetails/Header";
@@ -10,12 +9,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const RoomDetails = () => {
+    
     const { id } = useParams()
-
-    // const [loading, setLoading] = useState(false)
-
-    // const [rooms, setRooms] = useState({})
-
 
     const {data: rooms = [], isLoading} = useQuery({
         queryKey: ['allRooms'],
@@ -24,19 +19,6 @@ const RoomDetails = () => {
             return res.data
         }
     })
-
-
-    
-    // useEffect(() => {
-    //     setLoading(true)
-    //     fetch('/rooms.json')
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             const singleRoom = data.find(room => room._id === id)
-    //             setRooms(singleRoom)
-    //         })
-    //     setLoading(false)
-    // }, [id])
 
     if (isLoading) return <Loader />
 
