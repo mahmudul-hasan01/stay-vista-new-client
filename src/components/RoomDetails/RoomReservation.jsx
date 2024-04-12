@@ -5,6 +5,7 @@ import Calender from './Calender'
 import { formatDistance } from 'date-fns'
 // import BookingModal from '../Modal/BookingModal'
 import useAuth from '../../hooks/useAuth'
+import BookingModal from '../Modal/BookingModal'
 
 const RoomReservation = ({ room }) => {
   console.log(room);
@@ -68,24 +69,24 @@ const RoomReservation = ({ room }) => {
         <Calender handleDateChange={handleDateChange} value={value} />
       </div>
       <hr />
-      {/* <div className='p-4'>
+      <div className='p-4'>
         <Button
           disabled={room.host.email === user.email || room.booked}
           onClick={() => setIsOpen(true)}
           label={'Reserve'}
         />
-      </div> */}
+      </div>
       <hr />
       <div className='p-4 flex items-center justify-between font-semibold text-lg'>
         <div>Total</div>
         <div>$ {totalPrice}</div>
       </div>
 
-      {/* <BookingModal
+      <BookingModal
         closeModal={closeModal}
         isOpen={isOpen}
         bookingInfo={bookingInfo}
-      /> */}
+      />
     </div>
   )
 }
