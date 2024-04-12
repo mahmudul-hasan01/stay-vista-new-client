@@ -1,20 +1,35 @@
 /* eslint-disable react/prop-types */
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 // import './CheckoutForm.css'
 import useAuth from '../../hooks/useAuth'
 import { ImSpinner9 } from 'react-icons/im'
+import { createPaymentIntent, saveBookingInfo, updateStatus } from '../../api/Bookings'
+import toast from 'react-hot-toast'
+import {useNavigate} from 'react-router-dom'
 
 const CheckoutForm = ({ bookingInfo, closeModal }) => {
-     
+
   const stripe = useStripe()
   const elements = useElements()
   const { user } = useAuth()
   const [cardError, setCardError] = useState('')
   const [clientSecret, setClientSecret] = useState('')
   const [processing, setProcessing] = useState(false)
+  const navigate = useNavigate()
 
   // Create Payment Intent
+
+  useEffect(() => {
+    if (bookingInfo.price > 0) {
+      createPaymentIntent({ price: bookingInfo.price })
+        .then(data => {
+          console.log(data.clientSecret)
+          setClientSecret(data.clientSecret)
+        })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleSubmit = async event => {
     event.preventDefault()
@@ -69,7 +84,23 @@ const CheckoutForm = ({ bookingInfo, closeModal }) => {
         transactionId: paymentIntent.id,
         date: new Date(),
       }
+      try {
+        // save booking
+        await saveBookingInfo(paymentInfo)
+        // update booking
+        await updateStatus(bookingInfo.roomId, true)
 
+        const text = `Booking Successfully! ${paymentIntent.id}`
+        toast.success(text)
+        navigate('/dashboard/my-booking')
+      }
+      catch (err) {
+        console.log(err.message);
+        toast.error(err.message)
+      }
+      finally {
+        setProcessing(false)
+      }
       setProcessing(false)
     }
   }
